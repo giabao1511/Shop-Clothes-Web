@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Catalogue from './pages/Catalogue'
 import Product from './pages/Product'
+import Cart from './pages/Cart'
 import Home from './pages/Home'
 
 const App = () => {
@@ -10,8 +11,9 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<Product />} />
-        <Route path="contact" element={<Catalogue />} />
+        <Route path="catalogue/:slug" element={<Product />} />
+        <Route path="catalogue" element={<Catalogue />} />
+        <Route path="cart" element={<Cart />} />
       </Route>
     </Routes>
   )
