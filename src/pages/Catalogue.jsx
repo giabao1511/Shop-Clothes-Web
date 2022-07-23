@@ -1,8 +1,9 @@
 import React from 'react'
+import Helmet from '../components/Helmet'
 
 const Catalogue = () => {
   return (
-    <div>Catalogue</div>
+    <Helmet title="Sản phẩm"></Helmet>
   )
 }
 
