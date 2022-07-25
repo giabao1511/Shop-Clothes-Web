@@ -22,6 +22,7 @@
   }
 
   &.shrink {
+    z-index: 100;
     height: $header-shrink-height;
     box-shadow: $box-shadow;
   }
