@@ -9,6 +9,7 @@ import Grid from '../components/Grid'
 import { Link } from "react-router-dom"
 import productData from "../assets/fake-data/products"
 import ProductCard from '../components/ProductCard'
+import banner from "../assets/images/banner.png"
 
 const Home = () => {
   return (
@@ -17,7 +18,7 @@ const Home = () => {
       <HeroSlider
         data={sliderData}
         control={true}
-        auto={false}
+        auto={true}
         timeOut={3000} />
 
       {/* policy section */}
@@ -57,6 +58,71 @@ const Home = () => {
           >
             {
               productData.getProducts(4).map((item, index) => (
+                <ProductCard
+                  key={index}
+                  img01={item.image01}
+                  img02={item.image02}
+                  name={item.title}
+                  price={Number(item.price)}
+                  slug={item.slug}
+                />
+              ))
+            }
+          </Grid>
+        </SectionBody>
+      </Section>
+
+      {/* new product section */}
+      <Section>
+        <SectionTitle>
+          sản phẩm mới
+        </SectionTitle>
+        <SectionBody>
+          <Grid
+            col={4}
+            mdCol={2}
+            smCol={1}
+            gap={20}
+          >
+            {
+              productData.getProducts(8).map((item, index) => (
+                <ProductCard
+                  key={index}
+                  img01={item.image01}
+                  img02={item.image02}
+                  name={item.title}
+                  price={Number(item.price)}
+                  slug={item.slug}
+                />
+              ))
+            }
+          </Grid>
+        </SectionBody>
+      </Section>
+
+      {/* banner section */}
+      <Section>
+        <SectionBody>
+          <Link to="/catalogue">
+            <img src={banner} alt="" />
+          </Link>
+        </SectionBody>
+      </Section>
+
+      {/* products section */}
+      <Section>
+        <SectionTitle>
+          sản phẩm phổ biến
+        </SectionTitle>
+        <SectionBody>
+          <Grid
+            col={4}
+            mdCol={2}
+            smCol={1}
+            gap={20}
+          >
+            {
+              productData.getProducts(12).map((item, index) => (
                 <ProductCard
                   key={index}
                   img01={item.image01}
