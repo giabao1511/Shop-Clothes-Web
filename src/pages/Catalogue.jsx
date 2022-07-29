@@ -15,7 +15,6 @@ const Catalogue = () => {
     size: []
   }
   const allProductsList = productData.getAllProducts();
-
   const [products, setProducts] = useState(allProductsList);
   const [filter, setFilter] = useState(initFilter)
   const filterRef = useRef(null);
@@ -75,7 +74,6 @@ const Catalogue = () => {
           return check !== undefined
         })
       }
-
       setProducts(temp);
     },
     [filter, allProductsList]
@@ -84,6 +82,8 @@ const Catalogue = () => {
   useEffect(() => {
     updateProducts()
   }, [updateProducts])
+
+  console.log("re-render");
 
   return (
     <Helmet title="Sản phẩm">
@@ -98,8 +98,9 @@ const Catalogue = () => {
             </div>
             <div className="catalogue__filter__widget__content">
               {categories.map((item, index) => (
-                <div className="catalogue__filter__widget__content__item" key={index}>
+                <div className="catalogue__filter__widget__content__item" key={index} >
                   <Checkbox
+                    checked={filter.category.includes(item.categorySlug)}
                     label={item.display}
                     onChange={input => filterSelect("CATEGORY", input.checked, item)}
                   />
@@ -116,6 +117,7 @@ const Catalogue = () => {
               {colors.map((item, index) => (
                 <div className="catalogue__filter__widget__content__item" key={index}>
                   <Checkbox
+                    checked={filter.color.includes(item.color)}
                     label={item.display}
                     onChange={input => filterSelect("COLOR", input.checked, item)}
                   />
@@ -132,6 +134,7 @@ const Catalogue = () => {
               {sizes.map((item, index) => (
                 <div className="catalogue__filter__widget__content__item" key={index}>
                   <Checkbox
+                    checked={filter.size.includes(item.size)}
                     label={item.display}
                     onChange={input => filterSelect("SIZE", input.checked, item)}
                   />
@@ -142,7 +145,7 @@ const Catalogue = () => {
 
           <div className="catalogue__filter__widget">
             <div className="catalogue__filter__widget__content">
-              <Button size="sm">xóa bộ lọc</Button>
+              <Button size="sm" onClick={() => setFilter(initFilter)}>xóa bộ lọc</Button>
             </div>
           </div>
         </div>
@@ -150,6 +153,9 @@ const Catalogue = () => {
           <Button size="sm" onClick={showHideFilter}>bộ lọc</Button>
         </div>
         <div className="catalogue__content">
+          {products.length === 0 && (
+            <h2 style={{ textAlign: 'center' }}>Không có sản phẩm nào trùng khớp!</h2>
+          )}
           <InfinityList data={products} />
         </div>
       </div>

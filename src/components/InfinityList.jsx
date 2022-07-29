@@ -21,9 +21,11 @@ const InfinityList = props => {
             // console.log(window.innerHeight, "window.innerHeight ")
             // console.log(listRef.current.clientHeight, "listRef.current.clientHeight")
             // console.log(listRef.current.offsetTop, "listRef.current.offsetTop")
-            if (window.scrollY + window.innerHeight >=
-                listRef.current.clientHeight + listRef.current.offsetTop + 200) {
-                setLoad(true)
+            if (listRef && listRef.current) {
+                if (window.scrollY + window.innerHeight >=
+                    listRef.current.clientHeight + listRef.current.offsetTop + 200) {
+                    setLoad(true)
+                }
             }
         })
     }, [listRef])
@@ -45,7 +47,6 @@ const InfinityList = props => {
         setLoad(false)
     }, [load, index, data, props.data])
 
-    console.log(data)
     return (
         <div ref={listRef}>
             <Grid
